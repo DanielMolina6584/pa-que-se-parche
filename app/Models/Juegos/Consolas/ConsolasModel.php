@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Models\Juegos\Salas;
+namespace App\Models\Juegos\Consolas;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SalasModel extends Model
+class ConsolasModel extends Model
 {
-    protected $table = 'salas_de_juego';
+    protected $table = 'consolas';
     protected $primaryKey = 'id';
     public $timestamps = false;
 
@@ -17,7 +16,8 @@ class SalasModel extends Model
     protected $fillable  = [
         'id',
         'nombre',
-        'ubicacion',
-        'estado'
+        'marca',
+        'estado',
+        'sala_id'
     ];
 }
