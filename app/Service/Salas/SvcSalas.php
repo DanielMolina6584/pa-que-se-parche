@@ -5,7 +5,7 @@ namespace App\Service\Salas;
 use App\Models\Juegos\Salas\SalasModel;
 use Illuminate\Support\Facades\Log;
 
-class SalasDeJuegoSvc
+class SvcSalas
 {
     public function listar($campos = [])
     {
@@ -21,6 +21,20 @@ class SalasDeJuegoSvc
         } catch (\Exception $e) {
             Log::error($e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
             return [];
+        }
+    }
+
+    public function crear($dataCrear)
+    {
+        try {
+            return SalasModel::create([
+                'nombre' => $dataCrear['nombre'],
+                'ubicacion' => $dataCrear['ubicacion'],
+                'estado' => SalasModel::ESTADO_ACTIVO,
+            ]);
+        } catch (\Exception $e) {
+            Log::error($e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+            return false;
         }
     }
 }

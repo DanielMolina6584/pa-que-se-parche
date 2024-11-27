@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Service\Salas\SvcSalas;
+use App\Service\Consolas\SvcConsolas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class SalasDeJuegoController extends Controller
+class ConsolasController extends Controller
 {
-    protected $svcSalasDeJuego;
+    protected $svcConsolas;
 
-    public function __construct(SvcSalas $svcSalasDeJuego, Request $request)
+    public function __construct(SvcConsolas $svcConsolas, Request $request)
     {
         parent::__construct($request);
-        $this->svcSalasDeJuego = $svcSalasDeJuego;
+        $this->svcConsolas = $svcConsolas;
     }
 
     public function listar()
     {
-        $listadoSalas = $this->svcSalasDeJuego->listar();
-        $this->setDataResponse($listadoSalas);
+        $listadoConsolas = $this->svcConsolas->listar();
+        $this->setDataResponse($listadoConsolas);
         $this->respSinError();
         return $this->sendResponse();
     }
@@ -29,7 +28,7 @@ class SalasDeJuegoController extends Controller
     {
         $validador = Validator::make($this->request->all(), [
             'nombre' => 'required',
-            'ubicacion' => 'required',
+            'marca' => 'required',
         ]);
 
         if ($validador->fails()) {
@@ -40,7 +39,7 @@ class SalasDeJuegoController extends Controller
         }
         $dataRequest = $this->request->all();
 
-        $this->svcSalasDeJuego->crear($dataRequest);
+        $this->svcConsolas->crear($dataRequest);
         $this->respSinError();
         return $this->sendResponse();
     }
