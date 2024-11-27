@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 abstract class Controller
 {
-    protected $response = [
-        'data' => [],
-        'error' => 1,
-        'mensaje' => [],
-    ];
+    protected $response = ['data' => [], 'error' => 1, 'mensaje' => []];
+
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
 
     /**
      * Enviar la respuesta final.
