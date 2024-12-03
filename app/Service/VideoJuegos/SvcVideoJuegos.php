@@ -10,14 +10,14 @@ class SvcVideoJuegos
     public function listar($campos = [])
     {
         try {
-            $listadoSalas = VideoJuegosModel::select('*');
+            $listadoVideojuegos = VideoJuegosModel::select('*');
 
             if (!empty($campos)) {
                 foreach ($campos as $campo => $valor) {
-                    $listadoSalas->where($campo, $valor);
+                    $listadoVideojuegos->where($campo, $valor);
                 }
             }
-            return $listadoSalas->get()?->toArray() ?? [];
+            return $listadoVideojuegos->get()?->toArray() ?? [];
         } catch (\Exception $e) {
             Log::error($e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
             return [];

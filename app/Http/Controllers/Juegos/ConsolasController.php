@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Juegos;
 
-use App\Service\VideoJuegos\SvcVideoJuegos;
+use App\Http\Controllers\Controller;
+use App\Service\Consolas\SvcConsolas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class VideoJuegosController extends Controller
+class ConsolasController extends Controller
 {
-    protected $svcVideoJuegos;
+    protected $svcConsolas;
 
-    public function __construct(SvcVideoJuegos $svcVideoJuegos, Request $request)
+    public function __construct(SvcConsolas $svcConsolas, Request $request)
     {
         parent::__construct($request);
-        $this->svcVideoJuegos = $svcVideoJuegos;
+        $this->svcConsolas = $svcConsolas;
     }
 
     public function listar()
     {
-        $listadoVideojuegos = $this->svcVideoJuegos->listar();
-        $this->setDataResponse($listadoVideojuegos);
+        $listadoConsolas = $this->svcConsolas->listar();
+        $this->setDataResponse($listadoConsolas);
         $this->respSinError();
         return $this->sendResponse();
     }
@@ -27,10 +28,8 @@ class VideoJuegosController extends Controller
     public function crear()
     {
         $validador = Validator::make($this->request->all(), [
-            'titulo' => 'required',
-            'genero' => 'required',
-            'descripcion' => 'required',
-            'imagen' => 'required',
+            'nombre' => 'required',
+            'marca' => 'required',
         ]);
 
         if ($validador->fails()) {
@@ -41,7 +40,7 @@ class VideoJuegosController extends Controller
         }
         $dataRequest = $this->request->all();
 
-        $this->svcVideoJuegos->crear($dataRequest);
+        $this->svcConsolas->crear($dataRequest);
         $this->respSinError();
         return $this->sendResponse();
     }

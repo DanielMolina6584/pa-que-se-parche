@@ -134,22 +134,6 @@ CREATE TABLE `usuarios_clientes` (
   `email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios_empresariales`
---
-
-CREATE TABLE `usuarios_empresariales` (
-  `id` bigint(20) NOT NULL,
-  `nombre` text NOT NULL,
-  `email` text NOT NULL,
-  `rol_id` bigint(20) DEFAULT NULL,
-  `estado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `videojuegos`
 --

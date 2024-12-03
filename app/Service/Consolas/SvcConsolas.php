@@ -10,14 +10,14 @@ class SvcConsolas
     public function listar($campos = [])
     {
         try {
-            $listadoSalas = ConsolasModel::select('*');
+            $listadodConsolas = ConsolasModel::select('*');
 
             if (!empty($campos)) {
                 foreach ($campos as $campo => $valor) {
-                    $listadoSalas->where($campo, $valor);
+                    $listadodConsolas->where($campo, $valor);
                 }
             }
-            return $listadoSalas->get()?->toArray() ?? [];
+            return $listadodConsolas->get()?->toArray() ?? [];
         } catch (\Exception $e) {
             Log::error($e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
             return [];
