@@ -45,7 +45,7 @@ class AutenticacionController extends Controller
         $idClienteNuevo = $this->svcUsuariosCliente->crear($dataUser);
 
         if (!empty($idClienteNuevo['id'])) {
-            $rol = $this->svcUsuariosCliente->rolById($dataUser['rol_id']);
+            $rol = $this->svcUsuariosCliente->rolById($dataUser['rol_id'] ?? 1);
             $dataResponse = [
                 'id' => $idClienteNuevo['id'],
                 'rol' => $rol['nombre'],
