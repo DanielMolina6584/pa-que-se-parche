@@ -4,9 +4,16 @@ use App\Http\Controllers\Juegos\ConsolasController;
 use App\Http\Controllers\Juegos\SalasDeJuegoController;
 use App\Http\Controllers\Juegos\VideoJuegosController;
 use App\Http\Controllers\AutenticacionController;
+use App\Http\Controllers\Usuarios\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('basic.auth')->group(function () {
+    Route::prefix('usuarios')->group(function () {
+        Route::get('listar', [UsuariosController::class, 'listar']);
+        Route::post('crear/{id?}', [UsuariosController::class, 'crear']);
+        Route::delete('eliminar/{id}', [UsuariosController::class, 'eliminar']);
+    });
+
     Route::prefix('salas')->group(function () {
         Route::get('listar', [SalasDeJuegoController::class, 'listar']);
         Route::post('crear', [SalasDeJuegoController::class, 'crear']);

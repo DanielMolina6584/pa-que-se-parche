@@ -77,7 +77,7 @@ class AutenticacionController extends Controller
         $verificarUser = $this->svcUsuariosCliente->listar(['email' => $dataUser['email']]);
 
         if (empty($verificarUser)) {
-            $this->agregarError('El correo no existe');
+            $this->agregarError('El correo no se encuentra registrado');
             return $this->sendResponse();
         }
 

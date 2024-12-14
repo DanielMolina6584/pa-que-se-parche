@@ -14,7 +14,11 @@ class SvcCliente
     public function listar($campos = [], $array = false)
     {
         try {
-            $listadoClientes = Cliente::select('*');
+            $listadoClientes = Cliente::select(
+                'uc.*',
+                'r.nombre as nombre_rol')
+                ->from('usuarios_clientes as uc')
+                ->join('roles as r', 'r.id', '=', 'uc.rol_id');
 
             if (!empty($campos)) {
                 foreach ($campos as $campo => $valor) {
@@ -97,6 +101,20 @@ class SvcCliente
                 return Cliente::where('id', $atributoActualizar)->update($dataActualizar);
             } else {
                 return Cliente::where('email', $atributoActualizar)->update($dataActualizar);
+            }
+        } catch (\Exception $e) {
+            Log::error($e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function eliminarCliente($atributoEliminar)
+    {
+        try {
+            if (is_numeric($atributoEliminar)) {
+                return Cliente::where('id', $atributoEliminar)->delete();
+            } else {
+                return Cliente::where('email', $atributoEliminar)->delete();
             }
         } catch (\Exception $e) {
             Log::error($e->getFile() . ' - ' . $e->getLine() . ' - ' . $e->getMessage());
